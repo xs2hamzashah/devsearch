@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+{% block content %}
+
+{% if project is not none %}
+<h3> {{project.title | title}} </h3>
+<p> {{project.description | title}}</p>
+{% else %}
+<p>Project with this ID:{{pk}} is not porject</p>
+{% endif %}
+
+{% endblock content %}
+

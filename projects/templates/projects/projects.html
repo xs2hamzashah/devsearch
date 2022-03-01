@@ -4,17 +4,16 @@
 
 <h5>Welcome To Django Apps</h5>
 <p>
-   This is project: {{pk}}
-</p>
-<p>
-    {% if not none %}
-        <p> My name is Hamza. </p>
-    {% else %}
-        <p> Again my name is Hamza.</p>
-    {% endif %}
 
-    {% for name in names %}
-        <li>{{name|upper}} </li>
+<h3>List of Project Avaible</h3>
+
+<ul>
+    {% for project in projects %}
+    <li>
+        <a href="{% url 'project' project.id %}">{{project.title}}</a> --- {{project.description}} 
+    </li>
     {% endfor %}
+</ul>
+    
 </p>
 {% endblock content %}
