@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h5>Welcome To Django Apps</h5>
+<p>
+   This is project: {{pk}}
+</p>
+<p>
+    {% if not none %}
+        <p> My name is Hamza. </p>
+    {% else %}
+        <p> Again my name is Hamza.</p>
+    {% endif %}
+
+    {% for name in names %}
+        <li>{{name|upper}} </li>
+    {% endfor %}
+</p>
+{% endblock content %}
