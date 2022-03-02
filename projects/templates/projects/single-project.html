@@ -4,9 +4,16 @@
 {% if project is not none %}
 <h3> {{project.title | title}} </h3>
 <p> {{project.description | title}}</p>
+
+<hr>
+{% for tag in project.tags.all %}
+    <span style="border: 2px solid grey; margin-left: 10px;"> {{tag}} </span>
+{% endfor %}
+
 {% else %}
-<p>Project with this ID:{{pk}} is not porject</p>
+<p>Project with this ID:{{pk}} is not Found.</p>
 {% endif %}
+
 
 {% endblock content %}
 

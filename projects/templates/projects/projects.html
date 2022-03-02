@@ -2,18 +2,30 @@
 
 {% block content %}
 
-<h5>Welcome To Django Apps</h5>
-<p>
+<h4>Welcome To Django Apps</h4>
 
-<h3>List of Project Avaible</h3>
+<h5>List of Projects Avaible</h5>
 
-<ul>
+<table>
+    <tr>
+        <th>id</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Total Votes</th>
+        <th>Positive Votes</th>
+        <th>Link</th>
+    </tr>
     {% for project in projects %}
-    <li>
-        <a href="{% url 'project' project.id %}">{{project.title}}</a> --- {{project.description}} 
-    </li>
+    <tr>
+        <td>{{project.id|title }}</td>
+        <td>{{project.title|title}}</td>
+        <td>{{project.description|title}}</td>
+        <td>{{project.vote_total}}</td>
+        <td>{{project.vote_ratio}}%</td>
+        <td><a href="{% url 'project' project.id %}">{{project.title}}</a></td>
+    </tr>
     {% endfor %}
-</ul>
-    
-</p>
+</table>
+
+
 {% endblock content %}
