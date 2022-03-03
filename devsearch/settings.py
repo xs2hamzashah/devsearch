@@ -44,6 +44,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
+    
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -127,6 +130,12 @@ STATICFILES_DIRS = [
 ] 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images') # tells django where to upload content that user submitted
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
+# will use this in production
+# python manage.py collectstatic ... 
+# when we run this command django will copy all the static files into staticfiles folder. 
+# whether it admin staticfiles or user uploaded staticfiles, everthing we be copied here.
+# after deployment django doesn't look for static ...... it will look for staticfiles
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
