@@ -3,5 +3,7 @@ from . import views
 
 urlpatterns = [
     path('single-project/<str:pk>', views.project, name='project'),
-    path('projects', views.projects, name='projects')
+    path('projects', views.projects, name='projects'),
+
+    path('create-project', views.create_project, name='create-project')
 ]
