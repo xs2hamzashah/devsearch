@@ -2,6 +2,7 @@
 {% block content %}
 
 {% if project is not none %}
+<img style="max-width: 500px;" src="{{ project.featured_image.url  }}" alt="">
 <h3> {{project.title | title}} </h3>
 <p> {{project.description | title}}</p>
 
