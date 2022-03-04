@@ -1,13 +1,13 @@
-from email.policy import default
-from pyexpat import model
-from tokenize import blank_re
 from django.db import models
 import uuid
+
+from users.models import Profile
 
 
 # Create your models here.
 
 class Project(models.Model):
+    owner = models.ForeignKey(Profile, null=True, blank=True, on_delete=models.SET_NULL)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     title = models.CharField(max_length=255)
     featured_image = models.ImageField(null=True, blank=True, default='default.jpg') 
