@@ -1,6 +1,7 @@
+from ast import Mod
 from dataclasses import fields
 from django.forms import ModelForm
-from .models import Project
+from .models import Project, Review
 
 from django import forms
 
@@ -16,6 +17,27 @@ class ProjectForm(ModelForm):
     
     def __init__(self,  *args, **kwargs):
         super(ProjectForm, self).__init__(*args, **kwargs)
+
+        # self.fields['title'].widget.attrs.update({'class': 'input'})
+        # This is used add custom css class to django forms
+        for name,field in self.fields.items():
+            field.widget.attrs.update({'class': 'input'})
+
+
+
+class ReviewForm(ModelForm):
+    class Meta:
+        model = Review
+        fields= ['value', 'body']
+
+
+        labels = {
+            'value': 'Place Your Vote',
+            'body': 'Add a Comment with your Vote'
+        }
+    
+    def __init__(self,  *args, **kwargs):
+        super(ReviewForm, self).__init__(*args, **kwargs)
 
         # self.fields['title'].widget.attrs.update({'class': 'input'})
         # This is used add custom css class to django forms

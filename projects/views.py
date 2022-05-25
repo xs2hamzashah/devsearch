@@ -1,7 +1,8 @@
+from msilib.schema import RemoveIniFile
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-
-from .forms import ProjectForm
+from django.contrib import messages
+from .forms import ProjectForm, ReviewForm
 from .models import Project
 from .utils import searchProjects, paginateProjects
 
@@ -19,12 +20,22 @@ def projects(request):
 
 
 def project(request, pk):
-    ProjectList = Project.objects.all()
-    for project in ProjectList:
-        if str(project.id) == pk:
-            return render(request, 'projects/single-project.html', {'project': project, 'pk':pk})
+    projectObj = Project.objects.get(id=pk)
+    form = ReviewForm()
     
-    return render(request, 'projects/single-project.html', {'pk':pk})
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        review = form.save(commit=False)
+        review.project = projectObj
+        review.owner = request.user.profile
+        review.save()
+
+        
+        projectObj.getVoteCount
+        
+        messages.success(request, 'Your review was successfully submitted!')
+        return redirect('project', pk=projectObj.id)
+    return render(request, 'projects/single-project.html', {'project': projectObj, 'form':form})
 
 @login_required(login_url='login')
 def create_project(request):
