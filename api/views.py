@@ -1,5 +1,5 @@
 from api.serializers import ProjectSerializer
-from projects.models import Project
+from projects.models import Project, Review
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
@@ -46,7 +46,14 @@ def projectVote(request, pk):
     user = request.user.profile
     data = request.data
 
-    print('DATA: ', data)
+    review , created =  Review.objects.get_or_create(
+        owner = user,
+        project = project
+    )
+    review.value = data['value']
+    review.save()
+
+    project.getVoteCount
 
     serializer = ProjectSerializer(project, many=False)
 
